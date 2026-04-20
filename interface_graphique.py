@@ -58,3 +58,14 @@ class ViewSalle(ctk.CTk):
             int(self.capacite.get())
         )
         self.service_salle.ajouter_salle(salle)
+
+        self.btn_modifier.configure(command=self.modifier_salle)
+
+    def modifier_salle(self):
+        salle = Salle(
+            self.code.get(),
+            self.libelle.get(),
+            self.type.get(),
+            int(self.capacite.get())
+        )
+        self.service_salle.modifier_salle(salle)
