@@ -47,3 +47,14 @@ class ViewSalle(ctk.CTk):
 
         self.btn_rechercher = ctk.CTkButton(self.f2, text="Rechercher")
         self.btn_rechercher.grid(row=0, column=3)
+
+        self.btn_ajouter.configure(command=self.ajouter_salle)
+
+    def ajouter_salle(self):
+        salle = Salle(
+            self.code.get(),
+            self.libelle.get(),
+            self.type.get(),
+            int(self.capacite.get())
+        )
+        self.service_salle.ajouter_salle(salle)
