@@ -1,31 +1,26 @@
-from data.dao_salle import DataSalle
+from services.services_salle import ServiceSalle
 from models.salle import Salle
 
-dao = DataSalle()
+service = ServiceSalle()
 
-conn = dao.get_connection()
-print("connexion reussie")
-conn.close()
-
-s1 = Salle("xx19", "salle2026", "machines", 19)
-dao.insert_salle(s1)
-print("salle ajoutee")
-
-
-s1.libelle = "Salle Informatique"
-dao.update_salle(s1)
-print("salle modifiee")
-
-
-result = dao.get_salle("S01")
-if result:
-    result.afficher_infos()
-else:
-    print("pas de salle")
-
-salles = dao.get_salles()
+print("Liste des salles :")
+salles = service.recuperer_salles()
 for s in salles:
     s.afficher_infos()
 
-dao.delete_salle("S01")
-print("salle supprimee")
+s1 = Salle("yy19", "salle2027", "livres", 30)
+ok, msg = service.ajouter_salle(s1)
+print(msg)
+
+s1.libelle = "Salle Informatique"
+ok, msg = service.modifier_salle(s1)
+print(msg)
+
+result = service.rechercher_salle("yy20")
+if result:
+    result.afficher_infos()
+else:
+    print("Salle introuvable")
+
+ok = service.supprimer_salle("yy19")
+print("Salle supprimée")
