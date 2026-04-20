@@ -89,3 +89,4 @@ class ViewSalle(ctk.CTk):
             self.libelle.insert(0, salle.libelle)
             self.type.insert(0, salle.type)
             self.capacite.insert(0, salle.capacite)
+
