@@ -56,3 +56,14 @@ class DataSalle:
         if row:
             return Salle(row[0], row[1], row[2], row[3])
         return None
+
+    def get_salles(self):
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        query = "select * from salle"
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        cursor.close()
+        conn.close()
+
+        return [Salle(r[0], r[1], r[2], r[3]) for r in rows]
