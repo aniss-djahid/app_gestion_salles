@@ -44,3 +44,15 @@ class DataSalle:
         cursor.close()
         conn.close()
 
+    def get_salle(self, code):
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        query = "select * from salle where code = %s"
+        cursor.execute(query, (code,))
+        row = cursor.fetchone()
+        cursor.close()
+        conn.close()
+
+        if row:
+            return Salle(row[0], row[1], row[2], row[3])
+        return None
