@@ -28,17 +28,17 @@ class DataSalle:
     def update_salle(self, salle):
         conn = self.get_connection()
         cursor = conn.cursor()
-        query = "update salle set libelle = %s, capacite = %s where code = %s"
+        query = "update salle set libelle=%s, type=%s, capacite=%s where code=%s"
         values = (salle.libelle, salle.type, salle.capacite, salle.code)
         cursor.execute(query, values)
         conn.commit()
         cursor.close()
         conn.close()
 
-    def delete_salle(self, salle):
+    def delete_salle(self, code):
         conn = self.get_connection()
         cursor = conn.cursor()
-        query = "delete from salle where code = %s"
+        query = "DELETE FROM salle WHERE code=%s"
         cursor.execute(query, (code,))
         conn.commit()
         cursor.close()
